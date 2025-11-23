@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What fo lunch teach?</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <div id="welcome-screen" class="screen active">
+            <h1 class="title">what fo lunch teach?</h1>
+            <button id="start-btn" class="cartoon-btn">find out fn</button>
+        </div>
+
+        <div id="loading-screen" class="screen">
+            <h2 id="loading-text" class="title">Loading...</h2>
+        </div>
+
+        <div id="result-screen" class="screen">
+            <div class="content-box">
+                <h2 id="restaurant-name">Restaurant Name</h2>
+                <p id="menu-item">Menu Item</p>
+                <button id="again-btn" class="cartoon-btn small">Try Again</button>
+            </div>
+        </div>
+        <audio id="bg-music" loop>
+            <source src="afia.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>

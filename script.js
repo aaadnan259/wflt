@@ -100,8 +100,11 @@ const triggerConfetti = () => {
 let runawayCount = 0;
 const maxRunaways = 3;
 
-againBtn.addEventListener('mouseover', () => {
+const handleRunaway = (e) => {
     if (runawayCount < maxRunaways) {
+        // Prevent default behavior (like clicking) only if we are running away
+        e.preventDefault();
+
         const x = Math.random() * (window.innerWidth - againBtn.offsetWidth);
         const y = Math.random() * (window.innerHeight - againBtn.offsetHeight);
 
@@ -111,7 +114,10 @@ againBtn.addEventListener('mouseover', () => {
 
         runawayCount++;
     }
-});
+};
+
+againBtn.addEventListener('mouseover', handleRunaway);
+againBtn.addEventListener('touchstart', handleRunaway);
 
 const showResult = () => {
     // Play background music if not playing

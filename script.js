@@ -1,5 +1,6 @@
 import lunchData from './data.js';
 import backgroundImages from './images.js';
+import { getRandom } from './utils.js';
 
 const DEBUG = false;
 const logError = (msg, err) => {
@@ -48,9 +49,6 @@ const foodEmojis = ["🍔", "🍕", "🌮", "🥗", "🍟", "🌭", "🥪", "�
 // State for image shuffling
 let availableImages = [];
 
-// Helper to get random item from array
-const getRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
-
 // Helper to get unique random image
 const getNextImage = () => {
     if (availableImages.length === 0) {
@@ -77,16 +75,25 @@ const setRandomBackground = () => {
     app.style.backgroundImage = `url('pics/${randomImage}')`;
 };
 
+// Preload sound effects
+const audioCache = {};
+soundEffects.forEach(file => {
+    const audio = new Audio(`sound effect/${file}`);
+    audio.volume = 0.7;
+    audioCache[file] = audio;
+});
+
 // Play random sound effect
 const playRandomSound = () => {
     const soundFile = getRandom(soundEffects);
-    const audio = new Audio(`sound effect/${soundFile}`);
-    audio.volume = 0.7;
+    const audio = audioCache[soundFile];
+    audio.currentTime = 0;
     audio.play().catch(e => logError("Sound effect failed:", e));
 };
 
 // Trigger confetti
 const triggerConfetti = () => {
+    const fragment = document.createDocumentFragment();
     for (let i = 0; i < 50; i++) {
         const confetti = document.createElement('div');
         confetti.classList.add('confetti');
@@ -94,13 +101,14 @@ const triggerConfetti = () => {
         confetti.style.left = Math.random() * 100 + 'vw';
         confetti.style.animationDuration = (Math.random() * 2 + 1) + 's';
         confetti.style.fontSize = (Math.random() * 2 + 1) + 'rem';
-        document.body.appendChild(confetti);
+        fragment.appendChild(confetti);
 
         // Remove after animation
         setTimeout(() => {
             confetti.remove();
         }, 3000);
     }
+    document.body.appendChild(fragment);
 };
 
 // Runaway Button Logic

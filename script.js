@@ -2,6 +2,13 @@ import lunchData from './data.js';
 import backgroundImages from './images.js';
 import { getRandom } from './utils.js';
 
+const DEBUG = false;
+const logError = (msg, err) => {
+    if (DEBUG) {
+        console.error(msg, err);
+    }
+};
+
 const app = document.getElementById('app');
 const welcomeScreen = document.getElementById('welcome-screen');
 const loadingScreen = document.getElementById('loading-screen');
@@ -81,7 +88,7 @@ const playRandomSound = () => {
     const soundFile = getRandom(soundEffects);
     const audio = audioCache[soundFile];
     audio.currentTime = 0;
-    audio.play().catch(e => console.log("Sound effect failed:", e));
+    audio.play().catch(e => logError("Sound effect failed:", e));
 };
 
 // Trigger confetti
@@ -131,7 +138,7 @@ const showResult = () => {
     // Play background music if not playing
     const bgMusic = document.getElementById('bg-music');
     if (bgMusic.paused) {
-        bgMusic.play().catch(e => console.log("BG Audio play failed:", e));
+        bgMusic.play().catch(e => logError("BG Audio play failed:", e));
     }
 
     // Play funny sound

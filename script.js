@@ -70,11 +70,19 @@ const setRandomBackground = () => {
     app.style.backgroundImage = `url('pics/${randomImage}')`;
 };
 
+// Preload sound effects
+const audioCache = {};
+soundEffects.forEach(file => {
+    const audio = new Audio(`sound effect/${file}`);
+    audio.volume = 0.7;
+    audioCache[file] = audio;
+});
+
 // Play random sound effect
 const playRandomSound = () => {
     const soundFile = getRandom(soundEffects);
-    const audio = new Audio(`sound effect/${soundFile}`);
-    audio.volume = 0.7;
+    const audio = audioCache[soundFile];
+    audio.currentTime = 0;
     audio.play().catch(e => console.log("Sound effect failed:", e));
 };
 

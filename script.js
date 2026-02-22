@@ -1,5 +1,6 @@
 import lunchData from './data.js';
 import backgroundImages from './images.js';
+import { getRandom } from './utils.js';
 
 const app = document.getElementById('app');
 const welcomeScreen = document.getElementById('welcome-screen');
@@ -40,9 +41,6 @@ const foodEmojis = ["🍔", "🍕", "🌮", "🥗", "🍟", "🌭", "🥪", "�
 
 // State for image shuffling
 let availableImages = [];
-
-// Helper to get random item from array
-const getRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 // Helper to get unique random image
 const getNextImage = () => {

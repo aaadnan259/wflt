@@ -80,6 +80,7 @@ const playRandomSound = () => {
 
 // Trigger confetti
 const triggerConfetti = () => {
+    const fragment = document.createDocumentFragment();
     for (let i = 0; i < 50; i++) {
         const confetti = document.createElement('div');
         confetti.classList.add('confetti');
@@ -87,13 +88,14 @@ const triggerConfetti = () => {
         confetti.style.left = Math.random() * 100 + 'vw';
         confetti.style.animationDuration = (Math.random() * 2 + 1) + 's';
         confetti.style.fontSize = (Math.random() * 2 + 1) + 'rem';
-        document.body.appendChild(confetti);
+        fragment.appendChild(confetti);
 
         // Remove after animation
         setTimeout(() => {
             confetti.remove();
         }, 3000);
     }
+    document.body.appendChild(fragment);
 };
 
 // Runaway Button Logic
